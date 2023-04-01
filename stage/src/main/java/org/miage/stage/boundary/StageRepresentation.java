@@ -1,8 +1,8 @@
 package org.miage.stage.boundary;
 
-import org.miage.intervenantservice.control.IntervenantAssembler;
-import org.miage.intervenantservice.entity.Intervenant;
-import org.miage.intervenantservice.entity.IntervenantInput;
+import org.miage.stage.control.StageAssembler;
+import org.miage.stage.entity.OffreStage;
+import org.miage.stage.entity.OffreStageInput;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,13 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.Date;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping(value= "/offreStage", produces = MediaType.APPLICATION_JSON_VALUE)
-@ExposesResourceFor(offreStage.class)
+@ExposesResourceFor(OffreStage.class)
 public class StageRepresentation{
     private final StageResource sr;
     private final StageAssembler sa;
@@ -35,12 +36,12 @@ public class StageRepresentation{
      */
     @GetMapping
     public ResponseEntity<?> getAllOffreStage(){
-        return ResponseEntity.ok(sa.toCollectionModel(sr.findAll()))
+        return ResponseEntity.ok(sa.toCollectionModel(sr.findAll()));
     }  
 
     /**
      * Get data by id
-     * @param id
+     * @param integer
      * @return
      */    
     @GetMapping(value = "/stage/{idOffre}")
@@ -67,9 +68,9 @@ public class StageRepresentation{
             offreStage.getNomOrganisation();
             offreStage.getDescriptionStage();
             offreStage.getDatePubOffre();
-            offreStage.getNiveauEtudeStage();
+            offreStage.getNiveauEtudesStage();
             offreStage.getExpRequiseStage();
-            offreStage.getdateDebStage();
+            offreStage.getDateDebStage();
             offreStage.getDureeStage();
             offreStage.getSalaireStage();
             offreStage.getIndemnisation();
@@ -88,8 +89,8 @@ public class StageRepresentation{
     @DeleteMapping(value = "/stage/{idOffre}")
     @Transactional
     public ResponseEntity<?> deleteOneOffreStage(@PathVariable("idOffre") String id, @RequestBody OffreStage offreStage){
-        var offreStage = sr.findById(id);
-        offreStage.ifPresent(sr::delete);
+        var stage = sr.findById(id);
+        stage.ifPresent(sr::delete);
         return ResponseEntity.noContent().build();
     }
 
@@ -100,4 +101,15 @@ public class StageRepresentation{
      * @param intervenant
      * @return
      */
+    @PutMapping(value = "/stage/{idOffre}")
+    @Transactional
+    public ResponseEntity<?> updateOneOfrreStage(@PathVariable("idOffre") Integer id, @RequestBody OffreStage offreStage){
+        Optional<OffreStage> body = Optional.ofNullable(offreStage);
+        if(body.isEmpty()) return ResponseEntity.badRequest().build();
+        if (!sr.existsById(id)) return ResponseEntity.notFound().build();
+        offreStage.setIdOffre(id);
+        sr.save(offreStage);
+        return ResponseEntity.ok(offreStage);
+    }
+    
 }

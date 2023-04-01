@@ -1,35 +1,44 @@
 package org.miage.stage.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OffreStage  implements Serializable{
+public class OffreStage implements Serializable {
 
-  private static final long serialVersionUID = 6774930938047567575L;
+    private static final long serialVersionUID = 6774930938047567575L;
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idOffre;
+
     private String nomStage;
     private String domaine;
     private String nomOrganisation;
     private String descriptionStage;
-    private Date datePublicationOffre;
-    private String niveauEtudesStage;
-    private String experienceRequiseStage;
-    private Date dateDebutStage;
-    private int dureeStage;
-    private float salaireStage;
-    private boolean indemnisation;
-    private Organisation organisation;
-    private LieuStage lieuStage;
-  
-    // constructeurs, getters, setters
-  }
+    private Date datePubOffre;
+    private Integer niveauEtudeStage;
+    private Boolean expRequiseStage;
+    private Date dateDebStage;
+    private Integer dureeStage;
+    private Double salaireStage;
+    private Boolean indemnisation;
+    private String email;
+    private Integer telephone;
+    private String url;
+
+
+   
+}

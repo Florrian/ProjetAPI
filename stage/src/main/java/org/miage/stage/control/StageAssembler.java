@@ -1,6 +1,6 @@
 package org.miage.stage.control;
 
-import org.miage.stage.boundary.OffreStageRepresentation;
+import org.miage.stage.boundary.StageRepresentation;
 import org.miage.stage.entity.OffreStage;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -16,10 +16,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class StageAssembler implements RepresentationModelAssembler<OffreStage, EntityModel<OffreStage>> {
 
     @Override
-    public EntityModel<OffreStage> toModel(OffreStage OffreStage) {
-        return EntityModel.of(OffreStage,
-                linkTo(methodOn(OffreStageRepresentation.class).getOneOffreStage(offreStage.getId())).withSelfRel(),
-                linkTo(methodOn(OffreStageRepresentation.class).getOffreStage()).withRel("collection"));
+    public EntityModel<OffreStage> toModel(OffreStage offreStage) {
+        return EntityModel.of(offreStage,
+                linkTo(methodOn(StageRepresentation.class).getOneOffreStage(offreStage.getIdOffre())).withSelfRel(),
+                linkTo(methodOn(StageRepresentation.class).getAllOffreStage()).withRel("collection"));
     }
 
     @Override
@@ -28,6 +28,6 @@ public class StageAssembler implements RepresentationModelAssembler<OffreStage, 
                 .map(this::toModel)
                 .toList();
         return CollectionModel.of(OffreStageModel,
-                linkTo(methodOn(OffreStageRepresentation.class).getAllOffreStage()).withSelfRel());
+                linkTo(methodOn(StageRepresentation.class).getAllOffreStage()).withSelfRel());
     }
 }

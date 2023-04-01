@@ -45,7 +45,7 @@ public class StageRepresentation{
      * @return
      */    
     @GetMapping(value = "/stage/{idOffre}")
-    public ResponseEntity<?> getOneOffreStage(@PathVariable("idOffre") String id){
+    public ResponseEntity<?> getOneOffreStage(@PathVariable("idOffre") Integer id){
         return Optional.of(sr.findById(id))
                 .filter(Optional::isPresent)
                 .map(i -> ResponseEntity.ok(sa.toModel(i.get())))
@@ -62,22 +62,22 @@ public class StageRepresentation{
     @Transactional
     public ResponseEntity<?> save(@RequestBody @Valid OffreStageInput offreStage){
         Optional<OffreStageInput> body = Optional.ofNullable(offreStage);
-        OffreStage toSave = new OffreStage(UUID.randomUUID().toString());
+        OffreStage toSave = new OffreStage();
             offreStage.getNomStage();
             offreStage.getDomaine();
             offreStage.getNomOrganisation();
             offreStage.getDescriptionStage();
-            offreStage.getDatePubOffre();
+            //offreStage.getDatePubOffre();
             offreStage.getNiveauEtudesStage();
-            offreStage.getExpRequiseStage();
-            offreStage.getDateDebStage();
+            //offreStage.getExpRequiseStage();
+            //offreStage.getDateDebStage();
             offreStage.getDureeStage();
             offreStage.getSalaireStage();
-            offreStage.getIndemnisation();
-            offreStage.getEmail();
-            offreStage.getTelephone();
+            //offreStage.getIndemnisation();
+            //offreStage.getEmail();
+            //offreStage.getTelephone();
         OffreStage saved = sr.save(toSave);
-        URI location = linkTo(StageRepresentation.class).slash(saved.getId()).toUri();
+        URI location = linkTo(StageRepresentation.class).slash(saved.getIdOffre()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -88,7 +88,7 @@ public class StageRepresentation{
      */
     @DeleteMapping(value = "/stage/{idOffre}")
     @Transactional
-    public ResponseEntity<?> deleteOneOffreStage(@PathVariable("idOffre") String id, @RequestBody OffreStage offreStage){
+    public ResponseEntity<?> deleteOneOffreStage(@PathVariable("idOffre") Integer id, @RequestBody OffreStage offreStage){
         var stage = sr.findById(id);
         stage.ifPresent(sr::delete);
         return ResponseEntity.noContent().build();

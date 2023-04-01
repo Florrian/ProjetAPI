@@ -61,11 +61,11 @@ public class OffreStageInput{
     @Pattern(regexp = "[0-9]{15}")
     private boolean indemnisation;
 
-    @NotNull
-    @NotBlank
-    private Organisation organisation;
+    //@NotNull
+    //@NotBlank
+    //private Organisation organisation;
 
-    @NotNull
-    @NotBlank
-    private LieuStage lieuStage;
+    //@NotNull
+    //@NotBlank
+    //private LieuStage lieuStage;
 }

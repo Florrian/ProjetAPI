@@ -70,7 +70,9 @@ public class CandidatRepresentation {
     }
 
     @GetMapping("/offres")
-    public List<OffreStage> filterOffres(@RequestParam("domaine") String domaine,
+    public List<OffreStage> filterOffres(
+                                          @RequestParam("nomStage") String nomStage,
+                                          @RequestParam("domaine") String domaine,
                                           @RequestParam("dateDeb") String dateDeb,
                                           @RequestParam("organisation") String organisation,
                                           @RequestParam("pays") String pays,

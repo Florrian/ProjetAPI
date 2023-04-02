@@ -77,7 +77,7 @@ public class CandidatRepresentation {
                                           @RequestParam("organisation") String organisation,
                                           @RequestParam("pays") String pays,
                                           @RequestParam("ville") String ville) {
-        return offreStageResource.findByDomaineAndDateDebAndOrganisationAndPaysAndVille(domaine, dateDeb, organisation, pays, ville);
+        return offreStageResource.findByDomaineAndDateDebAndOrganisationAndPaysAndVille(nomStage, domaine, dateDeb, organisation, pays, ville);
     }
 
     @PostMapping("/offres/{idOffre}/postuler")

@@ -159,8 +159,8 @@ public class StageRepresentation{
 	LoadBalancerClientFactory clientFactory;
 
 
-	@CircuitBreaker(name = "candidat", fallbackMethod = "fallbackConversionCall")
-	@Retry(name = "fallbackExemple", fallbackMethod = "fallbackConversionCall")
+	@CircuitBreaker(name = "candidat", fallbackMethod = "fallbackOffreStageCall")
+	@Retry(name = "fallbackExemple", fallbackMethod = "fallbackOffreStageCall")
 	@GetMapping("/offreStage/candidat/{source}/cible/{cible}")
 	public OffreStage getCandidature(@PathVariable("source") String source, 
 				@PathVariable("cible") String cible, @PathVariable BigDecimal qte) {

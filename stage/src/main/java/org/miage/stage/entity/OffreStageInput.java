@@ -61,6 +61,14 @@ public class OffreStageInput{
     @Pattern(regexp = "[0-9]{15}")
     private boolean indemnisation;
 
+    @NotNull
+    @NotBlank
+    private String email;
+
+    @Size(min = 10, max = 10)
+    @Pattern(regexp = "[0-9]{10}")
+    private Integer telephone;
+
     //@NotNull
     //@NotBlank
     //private Organisation organisation;

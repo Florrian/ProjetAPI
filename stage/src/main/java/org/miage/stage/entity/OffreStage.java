@@ -18,11 +18,12 @@ import java.util.Date;
 @NoArgsConstructor
 public class OffreStage implements Serializable {
 
+    public OffreStage(String string) {
+    }
     private static final long serialVersionUID = 6774930938047567575L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idOffre;
+    private String idOffre;
 
     private String nomStage;
     private String domaine;

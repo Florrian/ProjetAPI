@@ -21,8 +21,13 @@ import com.repository.OffreStageRepository;
 
 
 @RestController
-@RequestMapping("/offres-de-stage")
+// @RequestMapping("/offres-de-stage")
 public class StageController {
+
+    @GetMapping("/test")
+	public String test() {
+        return "test.html"; // peut renvoyer un template
+    }
 
     @Autowired
     private OffreStageRepository offreStageRepository;
